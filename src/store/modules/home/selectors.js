@@ -1,0 +1,1 @@
+export const getJobAddress = state => state?.postJob?.address;
