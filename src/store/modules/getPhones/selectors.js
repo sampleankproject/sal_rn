@@ -1,0 +1,1 @@
+export const getAccountTypeList = state => state?.getPhones?.setPhoneTypeList;

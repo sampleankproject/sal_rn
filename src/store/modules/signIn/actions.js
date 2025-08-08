@@ -18,6 +18,12 @@ export const setAccountTypeList = setAccountTypeList => ({
     payload: {setAccountTypeList},
   });
 
+  export const addAccountTypesData = addAccountTypesData => ({
+    type: types.SET_ACCOUNT_TYPE_DATA,
+    payload: {addAccountTypesData},
+  });
+
+
 
 
 export const fetchAccountTypes = () => async (dispatch, getState)  => {
@@ -25,21 +31,22 @@ export const fetchAccountTypes = () => async (dispatch, getState)  => {
   const def = getState().signIn.setAccountTypeList;
   console.log("def", def)
     try {
-
-      const formatted = 1+def;
-      return dispatch(setAccountTypeList(formatted));
+//uncomment to increase count
+      // const formatted = 1+def;
+      // return dispatch(setAccountTypeList(formatted));
 
   /////--------------------------------------------------------------
-
-  // const variables = {
-  //   "postId": "6858365ea0669c50eb2f644c"
-  // };
-  // return dispatch(
-  //   ApiActions.fetchAsync(async.fetchAccountTypes, AccountBilling, variables),
-  // ).then((response) => {
-  //   console.log("RESPONSE", response)
-  //   // return dispatch(setBillingRate(employer?.billingRate));
-  // });
+//uncomment to fetch data
+  const variables = {
+    "postId": "6858365ea0669c50eb2f644c"
+  };
+  return dispatch(
+    ApiActions.fetchAsync(async.fetchAccountTypes, AccountBilling, variables),
+  ).then((response) => {
+    console.log("RESPONSE_fetch", response)
+    // return dispatch(setBillingRate(employer?.billingRate));
+    return dispatch(setAccountTypeList(response));
+  });
 
 
     } catch (error) {
@@ -60,7 +67,7 @@ export const fetchAccountTypes = () => async (dispatch, getState)  => {
     ).then((response) => {
       console.log("RESPONSE_add", response)
       
-      // return dispatch(setBillingRate(employer?.billingRate));
+      return dispatch(addAccountTypesData(response));
     });
 
   }

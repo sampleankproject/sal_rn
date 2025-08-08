@@ -7,7 +7,9 @@ import types from './types';
 const postJobInitialState = {
   address: "",
   workersNeeded: null,
-  setAccountTypeList: 1,
+  setAccountTypeList: [],
+  addAccountTypesData: [],
+  
 };
 
 const initialState = {
@@ -22,6 +24,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         setAccountTypeList,
+      };
+    }
+
+    case types.SET_ACCOUNT_TYPE_DATA: {
+      const {addAccountTypesData} = payload;
+      return {
+        ...state,
+        addAccountTypesData,
       };
     }
     default:

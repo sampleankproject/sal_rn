@@ -33,6 +33,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {actions as signInActions,
   selectors as SignInSelectors,
 } from './store/modules/signIn';
+import { SignInStack } from './Stack';
 
 
 
@@ -40,16 +41,18 @@ const RootNavigator=()=> {
 
   const RootStack = createNativeStackNavigator();
   const abc = 1;
-  const accountListData= useSelector(SignInSelectors.getAccountTypeList, shallowEqual);
-  console.log("RootNavigationScreen", accountListData)
+  // const accountListData= useSelector(SignInSelectors.getAccountTypeList, shallowEqual);
+  // console.log("RootNavigationScreen", accountListData)
   return (
    <RootStack.Navigator>
-{(accountListData<20)?
+{(abc < 300)?
       <RootStack.Screen name='Onboard' component={MyStack1} />
+      // <RootStack.Screen name='SignInRoot' component={SignInStack}/>
         
       :
       // <RootStack.Screen name='Onboard' component={MyStack2} />
-       <RootStack.Screen name='OnboardTab' component={MyStackTab} />   
+      //  <RootStack.Screen name='OnboardTab' component={MyStackTab} /> 
+       <RootStack.Screen name='Onboard' component={MyStack1} />  
 }
     </RootStack.Navigator>
 

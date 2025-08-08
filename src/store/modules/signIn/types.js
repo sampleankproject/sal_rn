@@ -1,4 +1,5 @@
 export default {
     SET_ACCOUNT_TYPE_LIST: 'signIn/SET_ACCOUNT_TYPE_LIST',
+    SET_ACCOUNT_TYPE_DATA: 'signIn/SET_ACCOUNT_TYPE_DATA',
     
 }

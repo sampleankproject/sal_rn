@@ -5,6 +5,7 @@ import ProfileScreen from './ProfileScreen';
 import ProfileScreen2 from './ProfileScreen2';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MyStack2Tab } from './BottomTabNavigator';
+import SignInScreen from './SignIn';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,4 +34,12 @@ export function MyStack2() {
         <Stack.Screen name="Tab" component={MyStack2Tab} />
       </Stack.Navigator>
     );
+}
+
+export function SignInStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+    </Stack.Navigator>
+  );
 }
