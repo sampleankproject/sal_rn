@@ -1,4 +1,7 @@
 export default {
   fetchAccountTypes: 'fetchAccountTypes',
-  addAccountTypes: 'addAccountTypes'
+  addAccountTypes: 'addAccountTypes',
+  signInGetUsrId: 'signInGetUsrId',
+  regUser: 'regUser',
+  fetchUserData: 'fetchUserData'
 };

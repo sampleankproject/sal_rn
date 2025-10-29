@@ -24,7 +24,7 @@ export const fetchAsync = (label, gql, variables) => dispatch =>
         data => () => resolve(data),
         err => () => reject(err),
       ),
-    ).catch(e=>{console.log("catch in fetchAsync:-");});
+    ).catch(e=>{console.log("catch in fetchAsync:-", e);});
   });
 
 export const start = label => ({

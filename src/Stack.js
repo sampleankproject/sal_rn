@@ -6,6 +6,7 @@ import ProfileScreen2 from './ProfileScreen2';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MyStack2Tab } from './BottomTabNavigator';
 import SignInScreen from './SignIn';
+import RegistrationScreen from './Registration';
 
 
 const Stack = createNativeStackNavigator();
@@ -31,7 +32,9 @@ export function MyStack2() {
   export function MyStackTab() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Tab" component={MyStack2Tab} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="Home" component={HomeScreen2} />
+        {/* <Stack.Screen name="Tab" component={MyStack2Tab} /> */}
       </Stack.Navigator>
     );
 }
@@ -39,7 +42,20 @@ export function MyStack2() {
 export function SignInStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Register" component={RegistrationScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="Home" component={HomeScreen2} />
+      <Stack.Screen name="Tab" component={MyStack2Tab} />
+    </Stack.Navigator>
+  );
+}
+
+
+export function RegistrationStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="Home" component={HomeScreen2} />
     </Stack.Navigator>
   );
 }

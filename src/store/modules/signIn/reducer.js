@@ -9,6 +9,8 @@ const postJobInitialState = {
   workersNeeded: null,
   setAccountTypeList: [],
   addAccountTypesData: [],
+  setUserToken: "",
+  setUserDetails:null
   
 };
 
@@ -34,6 +36,23 @@ export default (state = initialState, action) => {
         addAccountTypesData,
       };
     }
+    
+    case types.SET_USER_TOKEN: {
+      const {setUserToken} = payload;
+      return {
+        ...state,
+        setUserToken,
+      };
+    }
+
+    case types.SET_USER_DETAILS: {
+      const {setUserDetails} = payload;
+      return {
+        ...state,
+        setUserDetails,
+      };
+    }
+
     default:
       return state;
     }

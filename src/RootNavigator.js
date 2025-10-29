@@ -46,8 +46,8 @@ const RootNavigator=()=> {
   return (
    <RootStack.Navigator>
 {(abc < 300)?
-      <RootStack.Screen name='Onboard' component={MyStack1} />
-      // <RootStack.Screen name='SignInRoot' component={SignInStack}/>
+      // <RootStack.Screen name='Onboard' component={MyStack1} />
+      <RootStack.Screen name='SignInRoot' component={SignInStack}/>
         
       :
       // <RootStack.Screen name='Onboard' component={MyStack2} />
