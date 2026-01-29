@@ -20,25 +20,59 @@ export function MyStack2Tab() {
     return (
          <BottomTabStack.Navigator
           screenOptions={({ route }) => (
-            
             {
-          
             tabBarIcon: ({ focused, color, size }) => {
               console.log("routeName", route)
               console.log("focusedName", focused)
+              
               let iconName;
+           
 
-              if (route.name === 'Home') {
-                iconName = focused ? 'home' : 'home-outline';
+              if (route.name === 'Services') {
+                iconName = focused ? 'apps' : 'apps-outline';
+                
+              }  else if (route.name === 'Rewards') {
+                iconName = focused ? 'trophy' : 'trophy-outline';
+              }  else if (route.name === 'Pay') {
+                iconName = focused ? 'wallet' : 'wallet-outline';
+              } else if (route.name === 'Offers') {
+                iconName = focused ? 'bag-handle' : 'bag-handle-outline';
               } else{
-                iconName = focused ? 'settings' : 'settings-outline';
+                iconName = focused ? 'person' : 'person-outline';
               }
 
               // You can return any component that renders an icon
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: 'red',
-            tabBarInactiveTintColor: 'black',
+            tabBarActiveTintColor: '#C04000',
+            tabBarInactiveTintColor: 'grey',
+
+          
+
+            // tabBarShowLabel: ({ focused, color, size }) => {
+            //   console.log("routeNameLabel", route)
+            //   console.log("focusedNameLabel", focused)           
+            //   let iconNameLabel;
+            //   if (route.name === 'Services') {
+            //     iconNameLabel = focused ? true : false;
+            //   }  
+            //   console.log("iconNameLabel", iconNameLabel)
+            //   // You can return any component that renders an icon
+            //   return iconNameLabel;
+            // },
+
+
+            // tabBarLabel: ({ focused, horizontal, tintColor }) => {
+          
+            //   let title;
+            //   if (route.name === 'Services') {
+            //     title = focused ? 'Services' : 'scsd';
+            //   }else  {
+            //     title = focused ? 'Services' : 'Services';
+            //   }
+            //   return title
+            // }
+            // tabBarShowLabel : false 
           })}
           screenListeners={({ route, focused}) => ({
             tabPress: (e) => {
@@ -48,12 +82,14 @@ export function MyStack2Tab() {
               // Your custom logic for tab press event
               console.log(`Tab pressed: ${route.name}`);
             },
+            
           })}
+          
         >
         {/* <BottomTabStack.Screen name="HomeTab" component={HomeScreenTab} />
         <BottomTabStack.Screen name="ProfileTab" component={ProfileScreenTab} /> */}
 
-        <BottomTabStack.Screen name="Services" component={TabServices} />
+        <BottomTabStack.Screen options={{headerShown: false}} name="Services" component={TabServices} />
         <BottomTabStack.Screen name="Rewards" component={TabRewardTransaction} />
         <BottomTabStack.Screen name="Pay" component={TabPay} />
         <BottomTabStack.Screen name="Offers" component={TabOffers} />

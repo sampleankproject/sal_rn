@@ -20,9 +20,13 @@
 // export const URI= 'http://localhost:3000/graphql'
 // export const URL='http://localhost:3000/graphql'
 
+// //android
+// export const URI= 'http://10.0.2.2:3000/graphql'
+// export const URL='http://10.0.2.2:3000/graphql'
 
-export const URI= 'http://10.0.2.2:3000/graphql'
-export const URL='http://10.0.2.2:3000/graphql'
+//ios
+export const URI= 'http://127.0.0.1:3000/graphql'
+export const URL='http://127.0.0.1:3000/graphql'
 
 // export const URI= 'http://192.168.0.103:3000/graphql';
 // export const URL= 'http://192.168.0.103:3000/graphql';

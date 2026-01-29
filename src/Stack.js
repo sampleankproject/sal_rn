@@ -45,7 +45,7 @@ export function SignInStack() {
       <Stack.Screen name="Register" component={RegistrationScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="Home" component={HomeScreen2} />
-      <Stack.Screen name="Tab" component={MyStack2Tab} />
+      <Stack.Screen options={{headerShown: false}} name="Tab" component={MyStack2Tab} />
     </Stack.Navigator>
   );
 }

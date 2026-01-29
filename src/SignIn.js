@@ -23,43 +23,43 @@ const SignInScreen = () => {
         email: email,
         password: password
     }
-     const fetchSignInData = () => dispatch(signInActions.signInGetUsrId(userCredential));
+    const fetchSignInData = () => dispatch(signInActions.signInGetUsrId(userCredential));
 
-          const handleCheckSignIn = async () => {
-            const tokenCredentialsId = await Keychain.getGenericPassword();
-            console.log("CHECK_handleCheckSignIn_gettoken",tokenCredentialsId.password);
-            const userToken = {
-              usrUniqueId: tokenCredentialsId.password
-            }
-            dispatch(signInActions.fetchUserData(userToken));
-            };
+    const handleCheckSignIn = async () => {
+      const tokenCredentialsId = await Keychain.getGenericPassword();
 
-    const signInfetchData =()=>{
-    console.log("SIGN IN LOG signInGetUsrId")
-    fetchSignInData();
-    setTimeout(()=>{
-      handleCheckSignIn();
-    }, 1000);
-    navigation.navigate('Tab'); 
+      if (!tokenCredentialsId) {
+        throw new Error("No credentials found");
+      }
+      const userToken = {
+        usrUniqueId: tokenCredentialsId.password
+      }
+      console.log("Sign_In_userToken", userToken)
+      dispatch(signInActions.fetchUserData(userToken));
+      };
+
+    const signInfetchData = async()=>{
+    try {
+      await fetchSignInData(); ///getToken
+      await handleCheckSignIn()
+      .then(navigation.navigate('Tab'))
+    } catch (error) {
+    }
     }
 
     const enterPhone = (phoneData) =>{
-      console.log("phoneData", phoneData)
       setPhone(phoneData)
     }
 
     const enterEmail = (emailData) =>{
-      console.log("emailData", emailData)
       setEmail(emailData)
     }
 
     const enterPassword = (passwordData) =>{
-      console.log("passwordData", passwordData)
       setPassword(passwordData)
     }
 
     const register =()=>{
-      console.log("Register Here")
       navigation.navigate('Register');
       }
 

@@ -10,6 +10,8 @@ import {actions as signInActions,
   selectors as SignInSelectors,
 } from './store/modules/signIn';
 import * as Keychain from "react-native-keychain";
+import { getUserToken } from './store/modules/signIn/selectors';
+import {store} from '../src/store/store'
 
 
 const RegistrationScreen = () => {
@@ -36,25 +38,31 @@ const RegistrationScreen = () => {
 
     const setUserRegData = () => dispatch(signInActions.regUser(regValue));
 
+    const setUserDetailsEmpty = () => dispatch(signInActions.setUserDetailsEmpty());
+
+    const setUserTokenEmpty = () => dispatch(signInActions.setUserTokenEmpty());
+
     const handleCheckSignIn = async () => {
       const tokenCredentialsId = await Keychain.getGenericPassword();
-      console.log("CHECK_handleCheckSignIn_gettoken",tokenCredentialsId.password);
+
+      if (!tokenCredentialsId) {
+        throw new Error("No credentials found");
+      }
       const userToken = {
         usrUniqueId: tokenCredentialsId.password
       }
       dispatch(signInActions.fetchUserData(userToken));
       };
 
-      const clearToken = async () =>{
+    const clearToken = async () =>{
         const tokenCredentialsId = await Keychain.resetGenericPassword();
-        console.log("clearToken_tokenCredentialsId",tokenCredentialsId);
+        setUserDetailsEmpty();
+        setUserTokenEmpty();
       }
 
-      const getToken = async () =>{
+    const getToken = async () =>{
         const tokenCredentialsId = await Keychain.getGenericPassword();
-        console.log("getToken_tokenCredentialsId",tokenCredentialsId)
       }
-
 
     const enterFullName = (fullNameData) =>{
       setFullName(fullNameData)
@@ -77,14 +85,15 @@ const RegistrationScreen = () => {
     }
     
 
-     const registerHere =()=>{
-      setUserRegData();
-      setTimeout(()=>{
-        handleCheckSignIn();
-      }, 1000)
-
+     const registerHere =async()=>{
+      try{
+      await setUserRegData();
+      await handleCheckSignIn()
+      .then(navigation.navigate('Home'))
       // navigation.navigate('SignIn');
-      navigation.navigate('Home'); 
+      // navigation.navigate('Home'); 
+      }catch (error) {
+      }
       }
 
     const signIn =()=>{
