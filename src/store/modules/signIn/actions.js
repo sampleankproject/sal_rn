@@ -24,7 +24,6 @@ export const setUserDetails = setUserDetails => {
 })};
 
 export const setUserDetailsEmpty = () => {
-  console.log("setUserDetails_RRRRRRR_Empty");
  return (
   {
   type: types.SET_USER_DETAILS,
@@ -34,7 +33,6 @@ export const setUserDetailsEmpty = () => {
 
 export const setUserToken = setUserToken => {
   console.log("44444444")
-  console.log("setUserToken_RRRRRRR", setUserToken);
  return (
   {
   type: types.SET_USER_TOKEN,
@@ -42,7 +40,6 @@ export const setUserToken = setUserToken => {
 })};
 
 export const setUserTokenEmpty = () => {
-  console.log("setUserToken_RRRRRRR_Empty");
  return (
   {
   type: types.SET_USER_TOKEN,
@@ -63,9 +60,7 @@ export const setAccountTypeList = setAccountTypeList => ({
 
 
 export const fetchAccountTypes = () => async (dispatch, getState)  => {
-  console.log("fetchAccountTypes", fetchAccountTypes)
   const def = getState().signIn.setAccountTypeList;
-  console.log("def", def)
     try {
 //uncomment to increase count
       // const formatted = 1+def;
@@ -105,35 +100,14 @@ export const fetchAccountTypes = () => async (dispatch, getState)  => {
 
   const handleLogin = async (secureToken) => {
     console.log("2222222")
-    console.log("secureToken", secureToken)
     const nameToken = "secureValueToken";
     const token = secureToken;
     await Keychain.setGenericPassword(nameToken, token);
-    console.log("secureToken_ZZZZZZZ", secureToken);
     console.log("3333333")
   };
 
-  export const regUser2 = (regUserData) => async (dispatch, getState)  => {
-    console.log("regUserData_AAJJAJAJ", regUserData)
-    const variables = regUserData; 
-    return dispatch(
-      ApiActions.fetchAsync(async.regUser, SetUserRegData, variables),
-    ).then((response) => {
-      if (!response) {
-        throw new Error("User token not found in response");
-      }
-      console.log("RESPONSE_addReg", response)
-      console.log("RESPONSE_add", response.data.createMemberData.usrUniqueId);
-      const secureToken = response?.data?.createMemberData?.usrUniqueId
-      console.log("reg_secureToken", secureToken)
-      handleLogin(secureToken);
-      return dispatch(setUserToken(secureToken))
-    }).catch((error)=>{console.log("regUser error", error)});
-  }
 
   export const regUser = (regUserData) => async (dispatch, getState)  => {
-    console.log("regUserData_AAJJAJAJ", regUserData)
-    console.log("reg_11111111")
     const variables = regUserData; 
     try {
       const response = await  dispatch(
@@ -145,38 +119,14 @@ export const fetchAccountTypes = () => async (dispatch, getState)  => {
     )
       const secureToken = response?.data?.createMemberData?.usrUniqueId
       if (!secureToken) {
-        console.log("secureToken is missing")
         throw new Error("secureToken is missing");
       }
-      console.log("reg_secureToken", secureToken)
       await handleLogin(secureToken);
       return dispatch(setUserToken(secureToken));
   }catch (error) {
-    console.log("SIGNIN_NOT_SUCCESSFUL", error);
     throw error;
   }}
 
-  export const signInGetUsrId2 = (userCredential) => async (dispatch, getState)  => {
-    console.log("signIn_userCredential_AAJJAJAJ", userCredential)
-    console.log("signInGetUsrId_ACTION");
-    const variables = userCredential; 
-    // const variables = {"email": "abc@getMaxListeners.com", "password": "abc123"}
-    // const variables = {"keyword": "sh"}
-    return  dispatch(
-      ApiActions.fetchAsync(async.signInGetUsrId, GetMemberDataUsrIdEncrypt, variables),
-    ).then((response) => {
-      if (!response) {
-        throw new Error("User token not found in response");
-      }
-      console.log("RESPONSE_signInGetUsrId", response)
-      console.log("RESPONSE_add_signInGetUstId", response.data.getMemberDataUsrIdEncrypt[0].usrUniqueId);
-      // const secureToken = { usrUniqueId: response.data.getMemberDataUsrIdEncrypt[0].usrUniqueId}; 
-      const secureToken = response?.data?.getMemberDataUsrIdEncrypt?.[0]?.usrUniqueId
-      handleLogin(secureToken);
-      console.log("signI148n_secureToken", secureToken)
-       return dispatch(setUserToken(secureToken))
-    }).catch((error)=>{console.log("SIGNIN_NOT_SUCCESFULL", error)});
-  }
 
   export const signInGetUsrId =
   (userCredential) => async (dispatch, getState) => {
@@ -189,24 +139,15 @@ export const fetchAccountTypes = () => async (dispatch, getState)  => {
           userCredential
         )
       );
-
       const secureToken =
         response?.data?.getMemberDataUsrIdEncrypt?.[0]?.usrUniqueId;
-
       if (!secureToken) {
-        console.log("secureToken is missing")
         throw new Error("secureToken is missing");
       }
-
-      console.log("SECURE_TOKEN_OK", secureToken);
-
       await handleLogin(secureToken); // 🔑 await this
-
       return  dispatch(setUserToken(secureToken)); // 🔥 this WILL run now
       // return secureToken;
-
     } catch (error) {
-      console.log("SIGNIN_NOT_SUCCESSFUL", error);
       throw error;
     }
   };
@@ -214,15 +155,11 @@ export const fetchAccountTypes = () => async (dispatch, getState)  => {
 
   export const fetchUserData = (userToken) => async (dispatch, getState)  => {
     console.log("6666666")
-    console.log("userToken", userToken)
     const variables = userToken; 
-    // const variables = { usrUniqueId:"hjajdddf"}; 
-    console.log("fetchUserData_variables", variables)
     return dispatch(
       ApiActions.fetchAsync(async.fetchUserData, GetUserDataByToken, variables),
     ).then((response) => {
       console.log("7777777")
-      console.log("USER_DETAILS", response)
       return dispatch(setUserDetails(response.data))
     });
   }
