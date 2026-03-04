@@ -26,26 +26,32 @@ export function MyStack2Tab() {
               console.log("focusedName", focused)
               
               let iconName;
+              let bgcolor;
            
 
               if (route.name === 'Services') {
-                iconName = focused ? 'apps' : 'apps-outline';
+                iconName = focused ? 'apps-outline' : 'apps-outline';
+                bgcolor = focused ? '#acdbdf' : 'white';
                 
               }  else if (route.name === 'Rewards') {
-                iconName = focused ? 'trophy' : 'trophy-outline';
+                iconName = focused ? 'trophy-outline' : 'trophy-outline';
+                bgcolor = focused ? '#acdbdf' : 'white';
               }  else if (route.name === 'Pay') {
-                iconName = focused ? 'wallet' : 'wallet-outline';
+                iconName = focused ? 'wallet-outline' : 'wallet-outline';
+                bgcolor = focused ? '#acdbdf' : 'white';
               } else if (route.name === 'Offers') {
-                iconName = focused ? 'bag-handle' : 'bag-handle-outline';
+                iconName = focused ? 'bag-handle-outline' : 'bag-handle-outline';
+                bgcolor = focused ? '#acdbdf' : 'white';
               } else{
-                iconName = focused ? 'person' : 'person-outline';
+                iconName = focused ? 'person-outline' : 'person-outline';
+                bgcolor = focused ? '#acdbdf' : 'white';
               }
 
               // You can return any component that renders an icon
-              return <Ionicons name={iconName} size={size} color={color} />;
+              return <Ionicons name={iconName} size={size} color={color} backgroundColor={bgcolor} borderRadius={20} justifyContent="center" justifyItem="center" alignItem="center"/>;
             },
-            tabBarActiveTintColor: '#C04000',
-            tabBarInactiveTintColor: 'grey',
+            tabBarActiveTintColor: '#3A49F9',
+            tabBarInactiveTintColor: '#92adff',
 
           
 
@@ -82,8 +88,9 @@ export function MyStack2Tab() {
               // Your custom logic for tab press event
               console.log(`Tab pressed: ${route.name}`);
             },
-            
+          
           })}
+          
           
         >
         {/* <BottomTabStack.Screen name="HomeTab" component={HomeScreenTab} />
